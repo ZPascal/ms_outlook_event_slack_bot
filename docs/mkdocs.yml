@@ -1,0 +1,12 @@
+docs_dir: content
+markdown_extensions:
+- pymdownx.tasklist
+nav:
+- Home: index.md
+- Microsoft Outlook Event Slack Bot:
+  - Model: outlook_calendar_slack_notification_bot/model.md
+  - Outlook Calendar: outlook_calendar_slack_notification_bot/outlook-calendar.md
+  - Slack: outlook_calendar_slack_notification_bot/slack.md
+repo_url: https://github.com/ZPascal/ms_outlook_event_slack_bot
+site_name: Microsoft Outlook Event Slack Bot
+theme: material
