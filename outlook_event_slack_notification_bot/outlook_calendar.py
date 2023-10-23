@@ -14,7 +14,6 @@ class OutlookCalendar:
         grafana_api_model (APIModel): This is where we store the grafana_api_model
     """
 
-
     def __init__(self, outlook_calendar_api: OutlookCalendarApi):
         self.outlook_calendar_api = outlook_calendar_api
         transport: httpx.HTTPTransport = httpx.HTTPTransport(
