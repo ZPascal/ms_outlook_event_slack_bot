@@ -1,0 +1,28 @@
+loaders:
+  - type: python
+    search_path: [outlook_event_slack_notification_bot]
+processors:
+  - type: filter
+  - type: smart
+  - type: crossref
+renderer:
+  type: mkdocs
+  pages:
+    - title: Home
+      name: index
+      source: README.md
+    - title: Microsoft Outlook Event Slack Bot
+      name: outlook_calendar_slack_notification_bot
+      children:
+        - title: Model
+          contents: [ model.* ]
+        - title: Outlook Calendar
+          contents: [ outlook_calendar.* ]
+        - title: Slack
+          contents: [ slack.* ]
+  mkdocs_config:
+    site_name: Microsoft Outlook Event Slack Bot
+    theme: material
+    repo_url: https://github.com/ZPascal/ms_outlook_event_slack_bot
+    markdown_extensions:
+        - pymdownx.tasklist
