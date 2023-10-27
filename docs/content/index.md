@@ -2,9 +2,9 @@
 The repository includes a Python-based Slack Bot for MS Outlook events
 
 # TODO for the first pre-release:
-- [ ] Unit tests
 - [ ] Documentation
-- [x] Error handling
+- [ ] Error handling
+- [ ] Unit tests
 
 # TODO for the first release:
 - [ ] Integration tests
@@ -46,7 +46,7 @@ if __name__ == "__main__":
         tenant=args.tenant, client_id=args.client_id, client_secret=args.client_secret
     )
     outlook_calendar: OutlookCalendar = OutlookCalendar(outlook_calendar_api)
-    events: list = outlook_calendar.get_events(
+    events: list = outlook_calendar.get_daily_events(
         args.shared_calendar_name, args.shared_calendar_user
     )
     events_cw: list = outlook_calendar.get_weekly_events(events)
