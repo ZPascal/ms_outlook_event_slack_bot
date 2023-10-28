@@ -53,7 +53,7 @@ class Slack:
             )
             raise e
 
-        if response.status_code <= 200:
+        if response.status_code != 200:
             logging.error(
                 f"The corresponding return code {response.status_code} of the Slack call is not valid."
             )
