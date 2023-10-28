@@ -1,15 +1,22 @@
 # Microsoft Outlook Event API Slack Bot
-The repository includes a Python-based Slack Bot for MS Outlook events.
+The repository includes a Python-based Slack Bot for MS Outlook events
+
+# TODO for the first pre-release:
+- [ ] Unit tests
+- [ ] Documentation
+- [x] Error handling
+
+# TODO for the first release:
+- [ ] Integration tests
 
 ## Functionality
 
-The application allows accessing shared calendars of a user and reading the corresponding weekly events via Microsoft API calls. In the next step, it is possible to send this event in the form of a Slack message to a connected Slack channel.
 
 ## Installation
 
 `pip install outlook-event-slack-bot`
 
-## Example of use
+## Example
 
 ```python
 import argparse
@@ -45,18 +52,3 @@ if __name__ == "__main__":
     events_cw: list = outlook_calendar.get_weekly_events(events)
     Slack(SlackAPI(args.webhook), args.custom_notification).send_slack_message(events_cw)
 ```
-
-## Optimization potential:
-- [ ] Add Integration tests
-
-## Contribution
-If you would like to contribute something, have an improvement request, or want to make a change inside the code, please open a pull request.
-
-## Support
-If you need support, or you encounter a bug, please don't hesitate to open an issue.
-
-## Donations
-If you would like to support my work, I ask you to take an unusual action inside the open source community. Donate the money to a non-profit organization like Doctors Without Borders or the Children's Cancer Aid. I will continue to build tools because I like it and it is my passion to develop and share applications.
-
-## License
-This product is available under the Apache 2.0 license.
