@@ -20,8 +20,8 @@ from outlook_event_slack_notification_bot.outlook_calendar import OutlookCalenda
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Local script to get the IP address of the "
-                                                 "local machine and forward it.")
+    parser = argparse.ArgumentParser(description="Script to extract a user's Outlook calendar events and "
+                                                 "forward them to a Slack channel.")
     parser.add_argument("-wh", "--webhook", type=str, required=True, help="Get the Slack webhook")
     parser.add_argument("-t", "--tenant", type=str, required=True, help="Get the Microsoft tenant")
     parser.add_argument("-ci", "--client-id", type=str, required=True, help="Get the Microsoft OAuth Client ID")
