@@ -162,7 +162,7 @@ class OutlookCalendar:
         """
 
         today: datetime = datetime.today()
-        checked_days: int = 12
+        checked_days: int = 7
         events_cw: list = []
 
         try:
