@@ -149,6 +149,7 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git add --force docs
           git commit -m "docs: Add the documentation"
+          git pull
 
       - name: Push changes
         uses: ad-m/github-push-action@master
