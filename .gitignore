@@ -1,3 +1,4 @@
 .idea
 credentials.txt
 notes
+__pycache__/

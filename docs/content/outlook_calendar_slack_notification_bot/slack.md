@@ -35,7 +35,9 @@ The class includes all necessary methods to access the Slack endpoints
 #### send\_slack\_message
 
 ```python
-def send_slack_message(events_cw: list)
+def send_slack_message(events_cw: list,
+                       custom_successful_message: str = None,
+                       custom_error_message: str = None)
 ```
 
 The method includes a functionality to send the Slack messages
@@ -43,6 +45,8 @@ The method includes a functionality to send the Slack messages
 **Arguments**:
 
 - `events_cw` _list_ - Specify the calendar events
+- `custom_successful_message` _str_ - Specify the optional custom successful message (default None)
+- `custom_error_message` _str_ - Specify the optional custom error message (default None)
   
 
 **Raises**:

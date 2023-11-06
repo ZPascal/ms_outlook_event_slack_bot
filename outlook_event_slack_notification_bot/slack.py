@@ -26,11 +26,14 @@ class Slack:
         )
         self.slack_client: httpx.Client = httpx.Client(transport=transport, http2=True)
 
-    def send_slack_message(self, events_cw: list):
+    def send_slack_message(self, events_cw: list, custom_successful_message: str = None,
+                           custom_error_message: str = None):
         """The method includes a functionality to send the Slack messages
 
         Args:
             events_cw (list): Specify the calendar events
+            custom_successful_message (str): Specify the optional custom successful message (default None)
+            custom_error_message (str): Specify the optional custom error message (default None)
 
         Raises:
             ConnectionError: It is not possible to establish a connection to the endpoint
@@ -40,7 +43,8 @@ class Slack:
             None
         """
 
-        notification_message: str = self._create_slack_message(events_cw)
+        notification_message: str = self._create_slack_message(events_cw, custom_successful_message,
+                                                               custom_error_message)
         try:
             response: httpx.Response = self.slack_client.post(
                 self.slack_api.webhook,
@@ -59,11 +63,13 @@ class Slack:
             )
             raise ValueError
 
-    def _create_slack_message(self, events_cw: list) -> str:
+    def _create_slack_message(self, events_cw: list, custom_successful_message: str = None, custom_error_message: str = None) -> str:
         """The method includes a functionality to create the Slack message
 
         Args:
             events_cw (list): Specify the calendar events
+            custom_successful_message (str): Specify the optional custom successful message (default None)
+            custom_error_message (str): Specify the optional custom error message (default None)
 
         Raises:
             BaseException: Unspecified error by extracting the datetime information
@@ -74,6 +80,8 @@ class Slack:
 
         if len(events_cw) != 0:
             message: str = "*Events of the week:*\n"
+            if custom_successful_message is not None:
+                message: str = f"{custom_successful_message}\n"
 
             for event_cw in events_cw:
                 try:
@@ -94,5 +102,7 @@ class Slack:
                     message += f"{event_cw['bodyPreview']}"
         else:
             message: str = "*There are no events this week*\n"
+            if custom_error_message is not None:
+                message: str = f"{custom_error_message}\n"
 
         return message
