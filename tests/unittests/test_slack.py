@@ -104,9 +104,32 @@ class SlackTestCase(TestCase):
             ),
         )
 
+    def test_create_slack_message_custom_notification_message(self):
+        slack: Slack = Slack(self.slack_api, custom_notification=True)
+        self.assertEqual(
+            "*Test:*\nTest 27-10-2023\n@test",
+            slack._create_slack_message(
+                [
+                    {
+                        "name": "test",
+                        "start": {"dateTime": "2023-10-27T22:03:01.0000000"},
+                        "id": "testid",
+                        "subject": "Test",
+                        "bodyPreview": "@test",
+                    }
+                ],
+                custom_successful_message="*Test:*"
+            ),
+        )
+
     def test_create_slack_message_no_events_this_week(self):
         self.assertEqual(
             "*There are no events this week*\n", self.slack._create_slack_message([])
+        )
+
+    def test_create_slack_message_no_events_this_week_custom_message(self):
+        self.assertEqual(
+            "*Test*\n", self.slack._create_slack_message([], custom_error_message="*Test*")
         )
 
     def test_create_slack_message_wrong_event_datetime_format(self):
