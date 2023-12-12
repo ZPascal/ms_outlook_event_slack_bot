@@ -167,11 +167,17 @@ class OutlookCalendar:
 
         try:
             for event in events:
-                datetime_object: datetime = datetime.strptime(
+                datetime_object_start: datetime = datetime.strptime(
                     event["start"]["dateTime"][0:-1], "%Y-%m-%dT%H:%M:%S.%f"
                 )
-                datetime_object_days: int = (datetime_object.date() - today.date()).days
-                if 0 <= datetime_object_days <= checked_days:
+                datetime_object_end: datetime = datetime.strptime(
+                    event["end"]["dateTime"][0:-1], "%Y-%m-%dT%H:%M:%S.%f"
+                )
+                datetime_object_days_start: int = (datetime_object_start.date() - today.date()).days
+                datetime_object_days_end: int = (datetime_object_end.date() - today.date()).days - 1
+
+                if (-1 <= datetime_object_days_start <= checked_days) and (
+                        0 <= datetime_object_days_end <= checked_days):
                     events_cw.append(event)
                     events.remove(event)
         except BaseException as e:
