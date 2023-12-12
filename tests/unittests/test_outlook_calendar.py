@@ -223,9 +223,9 @@ class OutlookCalendarTestCase(TestCase):
         today: datetime.date = datetime.datetime.now().date().today()
         date: str = f"{today.year}-{today.month}-{today.day + 1}"
         self.assertEqual(
-            [{"start": {"dateTime": f"{date}T22:03:01.0000000"}}],
+            [{"start": {"dateTime": f"{date}T22:03:01.0000000"}, "end": {"dateTime": f"{date}T23:03:01.0000000"}}],
             outlook_calendar.get_weekly_events(
-                [{"start": {"dateTime": f"{date}T22:03:01.0000000"}}]
+                [{"start": {"dateTime": f"{date}T22:03:01.0000000"}, "end": {"dateTime": f"{date}T23:03:01.0000000"}}]
             ),
         )
 
@@ -246,7 +246,7 @@ class OutlookCalendarTestCase(TestCase):
 
         with self.assertRaises(BaseException):
             outlook_calendar.get_weekly_events(
-                [{"start": {"dateTime": "2023-10-27T22:03.0000000"}}]
+                [{"start": {"dateTime": "2023-10-27T22:03.0000000"}, "end": {"dateTime": "2023-10-29T22:03.0000000"}}]
             ),
 
     @patch(
@@ -267,6 +267,6 @@ class OutlookCalendarTestCase(TestCase):
         self.assertEqual(
             [],
             outlook_calendar.get_weekly_events(
-                [{"start": {"dateTime": "2023-10-10T22:03:01.0000000"}}]
+                [{"start": {"dateTime": "2023-10-10T22:03:01.0000000"}, "end": {"dateTime": "2023-10-12T22:03:01.0000000"}}]
             ),
         )
