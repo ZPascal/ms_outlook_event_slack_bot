@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 
 @dataclass
@@ -43,4 +43,4 @@ class OutlookCalendarApi:
     client_id: str
     client_secret: str
     retries: int = 5
-    microsoft_api: MicrosoftApi = MicrosoftApi()
+    microsoft_api: MicrosoftApi = field(default_factory=MicrosoftApi)
