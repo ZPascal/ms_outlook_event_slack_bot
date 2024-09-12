@@ -8,7 +8,7 @@ long_description = long_description.replace(coverage_string, "")
 
 setuptools.setup(
     name="outlook-event-slack-bot",
-    version="0.0.5",
+    version="0.0.6",
     author="Pascal Zimmermann",
     author_email="info@theiotstudio.com",
     description="A Microsoft Outlook event Slack bot",
