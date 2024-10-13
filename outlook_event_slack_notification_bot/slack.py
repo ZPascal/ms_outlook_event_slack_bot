@@ -26,8 +26,12 @@ class Slack:
         )
         self.slack_client: httpx.Client = httpx.Client(transport=transport, http2=True)
 
-    def send_slack_message(self, events_cw: list, custom_successful_message: str = None,
-                           custom_error_message: str = None):
+    def send_slack_message(
+        self,
+        events_cw: list,
+        custom_successful_message: str = None,
+        custom_error_message: str = None,
+    ):
         """The method includes a functionality to send the Slack messages
 
         Args:
@@ -43,8 +47,9 @@ class Slack:
             None
         """
 
-        notification_message: str = self._create_slack_message(events_cw, custom_successful_message,
-                                                               custom_error_message)
+        notification_message: str = self._create_slack_message(
+            events_cw, custom_successful_message, custom_error_message
+        )
         try:
             response: httpx.Response = self.slack_client.post(
                 self.slack_api.webhook,
@@ -63,7 +68,12 @@ class Slack:
             )
             raise ValueError
 
-    def _create_slack_message(self, events_cw: list, custom_successful_message: str = None, custom_error_message: str = None) -> str:
+    def _create_slack_message(
+        self,
+        events_cw: list,
+        custom_successful_message: str = None,
+        custom_error_message: str = None,
+    ) -> str:
         """The method includes a functionality to create the Slack message
 
         Args:
