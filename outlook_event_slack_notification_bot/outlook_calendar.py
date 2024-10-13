@@ -1,5 +1,4 @@
 import logging
-from calendar import calendar
 
 from .model import OutlookCalendarApi
 from datetime import datetime
@@ -44,7 +43,12 @@ class OutlookCalendar:
             events (list): Returns the corresponding calendar events
         """
 
-        if calendar_name is not None and len(calendar_name) != 0 and user_id is not None and len(user_id) != 0:
+        if (
+            calendar_name is not None
+            and len(calendar_name) != 0
+            and user_id is not None
+            and len(user_id) != 0
+        ):
             url: str = (
                 f"{self.outlook_calendar_api.microsoft_api.graph_api_url}/v1.0/users/{user_id}/calendars/"
                 f"{self._get_specific_user_calendar_id(calendar_name, user_id)}/events"
@@ -97,11 +101,16 @@ class OutlookCalendar:
                     datetime_object_end: datetime = datetime.strptime(
                         event["end"]["dateTime"][0:-1], "%Y-%m-%dT%H:%M:%S.%f"
                     )
-                    datetime_object_days_start: int = (datetime_object_start.date() - today.date()).days
-                    datetime_object_days_end: int = (datetime_object_end.date() - today.date()).days - 1
+                    datetime_object_days_start: int = (
+                        datetime_object_start.date() - today.date()
+                    ).days
+                    datetime_object_days_end: int = (
+                        datetime_object_end.date() - today.date()
+                    ).days - 1
 
                     if (-1 <= datetime_object_days_start <= checked_days) and (
-                            0 <= datetime_object_days_end <= checked_days):
+                        0 <= datetime_object_days_end <= checked_days
+                    ):
                         events_cw.append(event)
                         events.remove(event)
             except BaseException as e:
@@ -196,8 +205,15 @@ class OutlookCalendar:
             calendar_id (str): Returns the corresponding calendar id
         """
 
-        if calendar_name is not None and len(calendar_name) != 0 and user_id is not None and len(user_id) != 0:
-            url: str = f"{self.outlook_calendar_api.microsoft_api.graph_api_url}/v1.0/users/{user_id}/calendars"
+        if (
+            calendar_name is not None
+            and len(calendar_name) != 0
+            and user_id is not None
+            and len(user_id) != 0
+        ):
+            url: str = (
+                f"{self.outlook_calendar_api.microsoft_api.graph_api_url}/v1.0/users/{user_id}/calendars"
+            )
             headers: dict = {
                 "Authorization": f"Bearer {self.outlook_graph_api_access_token}",
                 "Content-Type": "application/json",
