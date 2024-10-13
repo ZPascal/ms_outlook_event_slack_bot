@@ -3,6 +3,7 @@
 * [outlook\_calendar](#outlook_calendar)
   * [OutlookCalendar](#outlook_calendar.OutlookCalendar)
     * [get\_events](#outlook_calendar.OutlookCalendar.get_events)
+    * [get\_events\_by\_days](#outlook_calendar.OutlookCalendar.get_events_by_days)
     * [get\_weekly\_events](#outlook_calendar.OutlookCalendar.get_weekly_events)
 
 <a id="outlook_calendar"></a>
@@ -48,6 +49,7 @@ The method includes a functionality to get the events
 
 **Raises**:
 
+- `ValueError` - Missed specifying a necessary value
 - `ConnectionError` - It is not possible to establish a connection to the endpoint
   
 
@@ -55,12 +57,38 @@ The method includes a functionality to get the events
 
 - `events` _list_ - Returns the corresponding calendar events
 
+<a id="outlook_calendar.OutlookCalendar.get_events_by_days"></a>
+
+#### get\_events\_by\_days
+
+```python
+@staticmethod
+def get_events_by_days(events: list, days: int) -> list
+```
+
+The method includes a functionality to get the weekly events
+
+**Arguments**:
+
+- `events` _list_ - Specify the calendar events
+- `days` - (int): Specify the control days
+  
+
+**Raises**:
+
+- `ValueError` - Missed specifying a necessary value
+- `BaseException` - Unspecified error by extracting the datetime information
+  
+
+**Returns**:
+
+- `events_cw` _list_ - Returns the corresponding weekly calendar events
+
 <a id="outlook_calendar.OutlookCalendar.get_weekly_events"></a>
 
 #### get\_weekly\_events
 
 ```python
-@staticmethod
 def get_weekly_events(events: list) -> list
 ```
 
@@ -73,6 +101,7 @@ The method includes a functionality to get the weekly events
 
 **Raises**:
 
+- `ValueError` - Missed specifying a necessary value
 - `BaseException` - Unspecified error by extracting the datetime information
   
 
