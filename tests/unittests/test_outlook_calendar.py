@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 from unittest import TestCase
 from unittest.mock import MagicMock, patch, Mock
 
@@ -30,7 +30,7 @@ class OutlookCalendarTestCase(TestCase):
         "outlook_event_slack_notification_bot.outlook_calendar.msal.ConfidentialClientApplication"
     )
     def test_get_oidc_access_token_acquire_token_silent_not_possible(
-        self, msal_confidential_client_application_mock
+            self, msal_confidential_client_application_mock
     ):
         mock: Mock = Mock()
         mock.acquire_token_silent.side_effect = BaseException
@@ -43,7 +43,7 @@ class OutlookCalendarTestCase(TestCase):
         "outlook_event_slack_notification_bot.outlook_calendar.msal.ConfidentialClientApplication"
     )
     def test_get_oidc_access_token_acquire_token_for_client_not_possible(
-        self, msal_confidential_client_application_mock
+            self, msal_confidential_client_application_mock
     ):
         outlook_calendar_api: OutlookCalendarApi = OutlookCalendarApi(
             tenant=MagicMock(), client_id=MagicMock(), client_secret=MagicMock()
@@ -61,7 +61,7 @@ class OutlookCalendarTestCase(TestCase):
         "outlook_event_slack_notification_bot.outlook_calendar.msal.ConfidentialClientApplication"
     )
     def test_get_specific_user_calendar_id(
-        self, msal_confidential_client_application_mock, httpx_get_mock
+            self, msal_confidential_client_application_mock, httpx_get_mock
     ):
         outlook_calendar: OutlookCalendar = OutlookCalendar(
             outlook_calendar_api=self.outlook_calendar_api
@@ -86,7 +86,7 @@ class OutlookCalendarTestCase(TestCase):
         "outlook_event_slack_notification_bot.outlook_calendar.msal.ConfidentialClientApplication"
     )
     def test_get_specific_user_calendar_id_no_calendars(
-        self, msal_confidential_client_application_mock, httpx_get_mock
+            self, msal_confidential_client_application_mock, httpx_get_mock
     ):
         outlook_calendar: OutlookCalendar = OutlookCalendar(
             outlook_calendar_api=self.outlook_calendar_api
@@ -107,7 +107,7 @@ class OutlookCalendarTestCase(TestCase):
         "outlook_event_slack_notification_bot.outlook_calendar.msal.ConfidentialClientApplication"
     )
     def test_get_specific_user_calendar_id_no_calendars_values(
-        self, msal_confidential_client_application_mock, httpx_get_mock
+            self, msal_confidential_client_application_mock, httpx_get_mock
     ):
         outlook_calendar: OutlookCalendar = OutlookCalendar(
             outlook_calendar_api=self.outlook_calendar_api
@@ -148,7 +148,7 @@ class OutlookCalendarTestCase(TestCase):
         "outlook_event_slack_notification_bot.outlook_calendar.msal.ConfidentialClientApplication"
     )
     def test_get_specific_user_calendar_id_no_matching_calendar_matching_value(
-        self, msal_confidential_client_application_mock, httpx_get_mock
+            self, msal_confidential_client_application_mock, httpx_get_mock
     ):
         outlook_calendar: OutlookCalendar = OutlookCalendar(
             outlook_calendar_api=self.outlook_calendar_api
@@ -174,7 +174,7 @@ class OutlookCalendarTestCase(TestCase):
         "outlook_event_slack_notification_bot.outlook_calendar.msal.ConfidentialClientApplication"
     )
     def test_get_events(
-        self, msal_confidential_client_application_mock, httpx_get_mock
+            self, msal_confidential_client_application_mock, httpx_get_mock
     ):
         outlook_calendar: OutlookCalendar = OutlookCalendar(
             outlook_calendar_api=self.outlook_calendar_api
@@ -204,10 +204,10 @@ class OutlookCalendarTestCase(TestCase):
         "outlook_event_slack_notification_bot.outlook_calendar.msal.ConfidentialClientApplication"
     )
     def test_get_events_no_events_available(
-        self,
-        msal_confidential_client_application_mock,
-        get_specific_user_calendar_id_mock,
-        httpx_get_mock,
+            self,
+            msal_confidential_client_application_mock,
+            get_specific_user_calendar_id_mock,
+            httpx_get_mock,
     ):
         outlook_calendar: OutlookCalendar = OutlookCalendar(
             outlook_calendar_api=self.outlook_calendar_api
@@ -263,7 +263,7 @@ class OutlookCalendarTestCase(TestCase):
         mock.acquire_token_for_client.return_value = dict({"access_token": "test"})
         msal_confidential_client_application_mock.return_value = mock
 
-        today: datetime.date = datetime.datetime.now().date().today()
+        today: datetime.date = datetime.now().date().today()
         date: str = f"{today.year}-{today.month}-{today.day + 1}"
         self.assertEqual(
             [{"start": {"dateTime": f"{date}T22:03:01.0000000"}, "end": {"dateTime": f"{date}T23:03:01.0000000"}}],
@@ -276,7 +276,7 @@ class OutlookCalendarTestCase(TestCase):
         "outlook_event_slack_notification_bot.outlook_calendar.msal.ConfidentialClientApplication"
     )
     def test_get_weekly_events_wrong_event_format(
-        self, msal_confidential_client_application_mock
+            self, msal_confidential_client_application_mock
     ):
         outlook_calendar: OutlookCalendar = OutlookCalendar(
             outlook_calendar_api=self.outlook_calendar_api
@@ -314,7 +314,7 @@ class OutlookCalendarTestCase(TestCase):
         "outlook_event_slack_notification_bot.outlook_calendar.msal.ConfidentialClientApplication"
     )
     def test_get_weekly_events_no_matching_value(
-        self, msal_confidential_client_application_mock
+            self, msal_confidential_client_application_mock
     ):
         outlook_calendar: OutlookCalendar = OutlookCalendar(
             outlook_calendar_api=self.outlook_calendar_api
@@ -328,7 +328,8 @@ class OutlookCalendarTestCase(TestCase):
         self.assertEqual(
             [],
             outlook_calendar.get_weekly_events(
-                [{"start": {"dateTime": "2023-10-10T22:03:01.0000000"}, "end": {"dateTime": "2023-10-12T22:03:01.0000000"}}]
+                [{"start": {"dateTime": "2023-10-10T22:03:01.0000000"},
+                  "end": {"dateTime": "2023-10-12T22:03:01.0000000"}}]
             ),
         )
 
@@ -349,6 +350,30 @@ class OutlookCalendarTestCase(TestCase):
 
         with self.assertRaises(ValueError):
             outlook_calendar.get_events_by_days(
-                [{"start": {"dateTime": "2023-10-10T22:03:01.0000000"}, "end": {"dateTime": "2023-10-12T22:03:01.0000000"}}],
+                [{"start": {"dateTime": "2023-10-10T22:03:01.0000000"},
+                  "end": {"dateTime": "2023-10-12T22:03:01.0000000"}}],
                 0,
             )
+
+    @patch(
+        "outlook_event_slack_notification_bot.outlook_calendar.msal.ConfidentialClientApplication"
+    )
+    def test_get_events_by_days_negative_days_specified(
+            self, msal_confidential_client_application_mock
+    ):
+        outlook_calendar: OutlookCalendar = OutlookCalendar(
+            outlook_calendar_api=self.outlook_calendar_api
+        )
+
+        mock: Mock = Mock()
+        mock.acquire_token_silent.return_value = dict({"access_token": "test"})
+        mock.acquire_token_for_client.return_value = dict({"access_token": "test"})
+        msal_confidential_client_application_mock.return_value = mock
+        today: datetime.date = datetime.now().date().today()
+        date: str = f"{today.year}-{today.month}-{today.day + 1}"
+
+        self.assertEqual([], outlook_calendar.get_events_by_days(
+            [{"start": {"dateTime": f"{date}T22:03:01.0000000"},
+              "end": {"dateTime": f"{date}T23:03:01.0000000"}}],
+            -1,
+        ))

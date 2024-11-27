@@ -1,12 +1,12 @@
 name: Integrationtest
 
 on:
-#  schedule:
-#    - cron: '0 22 * * 1'
+  schedule:
+    - cron: '0 22 * * 1'
   push:
     branches: [ main ]
-#  workflow_dispatch:
-#  workflow_call:
+  workflow_dispatch:
+  workflow_call:
 
 jobs:
 
@@ -27,4 +27,16 @@ jobs:
           cache: 'pip'
 
       - name: Install the requirements
-        run: pip install -r requirements.txt
+        run: pip install -r requirements.txt && pip install slack_sdk
+
+      - name: Execute the Integrationtests
+        run: python3 -m unittest discover tests/integrationtests
+        env:
+          OUTLOOK_CALENDAR_NAME: ${{ secrets.OUTLOOK_CALENDAR_NAME }}
+          OUTLOOK_CALENDAR_USERNAME: ${{ secrets.OUTLOOK_CALENDAR_USERNAME }}
+          OUTLOOK_CLIENT_ID: ${{ secrets.OUTLOOK_CLIENT_ID }}
+          OUTLOOK_CLIENT_SECRET: ${{ secrets.OUTLOOK_CLIENT_SECRET }}
+          OUTLOOK_TENANT: ${{ secrets.OUTLOOK_TENANT }}
+          SLACK_CHANNEL_NAME: ${{ secrets.SLACK_CHANNEL_NAME }}
+          SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}

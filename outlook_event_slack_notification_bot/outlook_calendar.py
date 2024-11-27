@@ -108,9 +108,14 @@ class OutlookCalendar:
                         datetime_object_end.date() - today.date()
                     ).days - 1
 
-                    if (-1 <= datetime_object_days_start <= checked_days) and (
-                        0 <= datetime_object_days_end <= checked_days
-                    ):
+                    if checked_days <= 0:
+                        checked_days_start: bool = -1 >= datetime_object_days_start >= checked_days
+                        checked_days_end: bool = -1 >= datetime_object_days_end >= checked_days
+                    else:
+                        checked_days_start: bool = -1 <= datetime_object_days_start <= checked_days
+                        checked_days_end: bool = 0 <= datetime_object_days_end <= checked_days
+
+                    if checked_days_start and checked_days_end:
                         events_cw.append(event)
                         events.remove(event)
             except BaseException as e:
