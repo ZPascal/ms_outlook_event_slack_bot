@@ -33,6 +33,7 @@ jobs:
         run: python3 -m unittest discover tests/integrationtests
         env:
           OUTLOOK_CALENDAR_NAME: ${{ secrets.OUTLOOK_CALENDAR_NAME }}
+          OUTLOOK_CALENDAR_USERNAME: ${{ secrets.OUTLOOK_CALENDAR_USERNAME }}
           OUTLOOK_CLIENT_ID: ${{ secrets.OUTLOOK_CLIENT_ID }}
           OUTLOOK_CLIENT_SECRET: ${{ secrets.OUTLOOK_CLIENT_SECRET }}
           OUTLOOK_TENANT: ${{ secrets.OUTLOOK_TENANT }}
