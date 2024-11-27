@@ -46,9 +46,6 @@ if __name__ == "__main__":
     Slack(SlackAPI(args.webhook), args.custom_notification).send_slack_message(events_cw)
 ```
 
-## Optimization potential:
-- [ ] Add Integration tests
-
 ## Contribution
 If you would like to contribute something, have an improvement request, or want to make a change inside the code, please open a pull request.
 
