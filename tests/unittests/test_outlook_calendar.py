@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from unittest import TestCase
 from unittest.mock import MagicMock, patch, Mock
 
@@ -263,8 +263,8 @@ class OutlookCalendarTestCase(TestCase):
         mock.acquire_token_for_client.return_value = dict({"access_token": "test"})
         msal_confidential_client_application_mock.return_value = mock
 
-        today: datetime.date = datetime.now().date().today()
-        date: str = f"{today.year}-{today.month}-{today.day + 1}"
+        tomorrow: datetime.date = datetime.now().date() + timedelta(days=1)
+        date: str = f"{tomorrow.year}-{tomorrow.month}-{tomorrow.day}"
         self.assertEqual(
             [{"start": {"dateTime": f"{date}T22:03:01.0000000"}, "end": {"dateTime": f"{date}T23:03:01.0000000"}}],
             outlook_calendar.get_weekly_events(
@@ -369,8 +369,8 @@ class OutlookCalendarTestCase(TestCase):
         mock.acquire_token_silent.return_value = dict({"access_token": "test"})
         mock.acquire_token_for_client.return_value = dict({"access_token": "test"})
         msal_confidential_client_application_mock.return_value = mock
-        today: datetime.date = datetime.now().date().today()
-        date: str = f"{today.year}-{today.month}-{today.day + 1}"
+        tomorrow: datetime.date = datetime.now().date() + timedelta(days=1)
+        date: str = f"{tomorrow.year}-{tomorrow.month}-{tomorrow.day}"
 
         self.assertEqual([], outlook_calendar.get_events_by_days(
             [{"start": {"dateTime": f"{date}T22:03:01.0000000"},
