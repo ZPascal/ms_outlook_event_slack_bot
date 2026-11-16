@@ -115,7 +115,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [ '3.9' ]
+        python-version: [ '3.10' ]
 
     steps:
       - uses: actions/checkout@v7
@@ -131,10 +131,10 @@ jobs:
           cache: 'pip'
 
       - name: Install the requirements
-        run: pip install pydoc-markdown==4.6.3 mkdocs mkdocs-material
+        run: pip install pydoc-markdown==4.8.2 mkdocs mkdocs-material
 
       - name: Generate documentation
-        run: pydoc-markdown --render-toc && rm -rf docs/content && mv build/docs/* docs && rm -rf build
+        run: pydoc-markdown && rm -rf docs/content && mv build/docs/* docs && rm -rf build
 
       - name: Check changed files
         id: verify-changed-files
